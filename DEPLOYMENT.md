@@ -14,8 +14,8 @@ Este proyecto está listo para desplegarse en EasyPanel con las siguientes confi
 ### 1. Conectar repositorio
 - Ir a EasyPanel dashboard
 - Crear nueva aplicación
-- Nombre del servicio: `billtracky-20` (solo minúsculas, números, guiones)
-- Conectar con GitHub: `https://github.com/Victamina15/billtracky-20.git`
+- Nombre del servicio: `billtracky-2` (solo minúsculas, números, guiones)
+- Conectar con GitHub: `https://github.com/Victamina15/billtracky-2.git`
 - Seleccionar rama: `main`
 
 ### 2. Configuración del servicio
