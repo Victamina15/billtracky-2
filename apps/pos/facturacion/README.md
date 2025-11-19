@@ -2,30 +2,33 @@
 
 ## 🎯 Descripción
 
-Módulo profesional de facturación POS diseñado para lavanderías. Interfaz moderna estilo Shopify POS que permite crear facturas de forma rápida e intuitiva.
+Módulo profesional de facturación POS para lavanderías, desarrollado desde cero con las mejores librerías modernas del ecosistema React. Interfaz inspirada en el diseño de Billtracky-1 pero completamente reescrito con arquitectura moderna y escalable.
 
-## 🚀 Características
+## ✨ Características Implementadas
 
-### Implementadas
-- ✅ Interfaz de dos columnas (servicios + resumen)
-- ✅ Gestión de estado con Zustand
-- ✅ Grid de servicios con búsqueda
-- ✅ Carrito de facturación interactivo
-- ✅ Cálculo automático de totales e ITBIS (18%)
-- ✅ Selector de métodos de pago
-- ✅ Gestión de cantidades (incrementar/decrementar)
-- ✅ Diseño responsive y profesional
-- ✅ Iconos modernos con Lucide React
-- ✅ Utilidades de fechas con date-fns
+### Interfaz de Usuario
+- ✅ **Header profesional** con fecha actual
+- ✅ **Selector de cliente** con búsqueda (preparado para DB)
+- ✅ **Selector de fecha de entrega** con opciones rápidas
+- ✅ **Categorías de servicios** con filtrado dinámico
+- ✅ **Buscador de servicios** en tiempo real
+- ✅ **Lista virtualizada** de servicios (soporta cientos de items sin lag)
+- ✅ **Carrito interactivo** con gestión de cantidades
+- ✅ **Cálculo automático** de subtotal, ITBIS (18%), y total
+- ✅ **Selector de métodos de pago** con validación
+- ✅ **Botones de acción**: Cobrar, Pendiente, Imprimir
+- ✅ **Notificaciones toast** profesionales
+- ✅ **Diseño responsive** (Desktop, Tablet, Móvil)
 
-### Por Implementar
-- ⏳ Conexión con módulo de CONFIGURACIÓN
-- ⏳ Conexión con base de datos PostgreSQL
-- ⏳ Generación de PDF de facturas
-- ⏳ Impresión de tickets
-- ⏳ Búsqueda de clientes
-- ⏳ Histórico de facturas
-- ⏳ Validaciones avanzadas
+### Tecnología y Arquitectura
+- ✅ Estado global con **Zustand 5.0**
+- ✅ Carga de datos con **React Query**
+- ✅ Validación con **Zod**
+- ✅ Virtualización con **@tanstack/react-virtual**
+- ✅ Toasts con **Sonner**
+- ✅ Iconos con **Lucide React**
+- ✅ Clases dinámicas con **clsx**
+- ✅ Manejo de fechas con **date-fns**
 
 ## 📁 Estructura del Proyecto
 
@@ -33,114 +36,182 @@ Módulo profesional de facturación POS diseñado para lavanderías. Interfaz mo
 facturacion/
 ├── src/
 │   ├── pages/
-│   │   └── NuevaFacturaPage.jsx    # Página principal
+│   │   └── NuevaFacturaPage.jsx       # Página principal
 │   ├── components/
-│   │   ├── HeaderFacturacion.jsx   # Encabezado con fecha y cajero
-│   │   ├── ServiciosGrid.jsx       # Grid de servicios disponibles
-│   │   ├── ServicioCard.jsx        # Tarjeta individual de servicio
-│   │   ├── ResumenFactura.jsx      # Panel de resumen lateral
-│   │   ├── LineaFactura.jsx        # Línea de item en factura
-│   │   ├── TotalesFactura.jsx      # Cálculo de totales
-│   │   └── MetodoPagoSelector.jsx  # Selector de método de pago
+│   │   ├── layout/
+│   │   │   ├── Header.jsx             # Header con fecha
+│   │   │   ├── ClienteSelector.jsx    # Búsqueda de clientes
+│   │   │   └── FechaEntregaSelector.jsx
+│   │   ├── servicios/
+│   │   │   ├── Categorias.jsx         # Filtro de categorías
+│   │   │   ├── ServicioCard.jsx       # Tarjeta de servicio
+│   │   │   └── ListaServicios.jsx     # Lista virtualizada
+│   │   └── factura/
+│   │       ├── LineaFactura.jsx       # Línea de item
+│   │       ├── Totales.jsx            # Cálculos
+│   │       ├── MetodosPago.jsx        # Selector de pago
+│   │       └── PanelFactura.jsx       # Panel completo
 │   ├── hooks/
-│   │   └── useFactura.js           # Estado global con Zustand
+│   │   └── useFacturaStore.js         # Store Zustand
 │   ├── data/
-│   │   └── mockServicios.js        # Datos mock de servicios
+│   │   ├── mockServicios.js           # 25 servicios mock
+│   │   └── mockMetodosPago.js         # Métodos de pago
 │   └── utils/
+│       ├── formatCurrency.js          # Formateo de moneda
+│       └── formatDate.js              # Formateo de fechas
 ├── package.json
 ├── vite.config.js
 ├── tailwind.config.js
+├── postcss.config.js
 └── README.md
 ```
 
-## 🛠️ Tecnologías Modernas
+## 🛠️ Tecnologías Modernas Utilizadas
 
 ### Core
-- **React 19** - Framework UI
+- **React 19** - Framework UI más reciente
 - **Vite 7** - Build tool ultrarrápido
 - **TailwindCSS 3.4** - Estilos utility-first
 
-### Librerías Profesionales
+### Librerías Profesionales (NO código viejo)
 - **Zustand 5.0** - Estado global ligero y moderno
-- **Lucide React** - Iconos SVG profesionales
-- **clsx** - Manejo de clases CSS dinámicas
-- **date-fns** - Manipulación de fechas
+- **@tanstack/react-query** - Manejo profesional de datos asincrónicos
+- **Zod** - Validación y esquemas de datos
+- **@tanstack/react-virtual** - Virtualización para listas grandes
+- **Lucide React** - Iconos SVG modernos y profesionales
+- **Sonner** - Sistema de notificaciones toast elegante
+- **clsx** - Manejo limpio de clases CSS condicionales
+- **date-fns** - Librería moderna para fechas (con soporte i18n)
 
-## 🎨 Diseño
+## 🎨 Diseño y UX
 
 ### Colores Oficiales
-- Fondo: `#F4F4F5` (Gris claro)
+- Fondo principal: `#F4F4F5` (Gris claro)
 - Contenedores: `#FFFFFF` (Blanco)
 - Primario: Azul (`blue-500`, `blue-600`)
-- Acentos: Gradientes de azul
+- Gradientes en botones principales
 
-### Tipografía
-- Sistema: `system-ui, -apple-system, sans-serif`
-- Pesos: Regular (400), Semibold (600), Bold (700)
+### Responsive Design
+```
+Desktop (>= 1024px):  2 columnas (Servicios 2/3 | Factura 1/3)
+Tablet (768-1023px):  2 columnas adaptadas
+Móvil (< 768px):      Stack vertical
+```
 
 ## 🔄 Flujo de Trabajo
 
-### 1. Selección de Servicios
+### 1. Selección de Cliente
 ```
-Usuario → ServiciosGrid → Click en ServicioCard → agregarServicio()
-```
-
-### 2. Gestión del Carrito
-```
-ResumenFactura → LineaFactura → incrementar/decrementar/eliminar
+ClienteSelector → Búsqueda → Seleccionar/Agregar → useFacturaStore.setCliente()
 ```
 
-### 3. Cálculo Automático
+### 2. Fecha de Entrega
 ```
-useFactura → getSubtotal() → getItbis() → getTotal()
-```
-
-### 4. Finalización
-```
-Seleccionar método de pago → Completar factura → Alert (temporal)
+FechaEntregaSelector → Botones rápidos → useFacturaStore.setFechaEntrega()
 ```
 
-## 🔌 Preparado para Integración
-
-### Módulo CONFIGURACIÓN (Futuro)
-El módulo está preparado para recibir datos del módulo de configuración:
-
-```javascript
-// Placeholders en mockServicios.js
-export const getServiciosConfigurados = async () => {
-  // TODO: Conectar con módulo de configuración
-  // return await api.getServicios();
-};
-
-export const getMetodosPagoConfigurados = async () => {
-  // TODO: Conectar con módulo de configuración
-  // return await api.getMetodosPago();
-};
+### 3. Selección de Servicios
+```
+Categorias → Filtrar → Buscador → ListaServicios (virtualizada) → Click ServicioCard → useFacturaStore.agregarServicio() → Toast confirmación
 ```
 
-### Base de Datos
-Preparado para conectar con PostgreSQL a través de variables de entorno:
+### 4. Gestión del Carrito
+```
+PanelFactura → LineaFactura → Incrementar/Decrementar/Eliminar → Actualización automática de totales
+```
 
-```env
-DATABASE_URL=postgresql://postgres:1976@app-pos-2_postgres-db:5432/app-pos-2
+### 5. Pago y Finalización
+```
+MetodosPago → Seleccionar → [Referencia si es requerida] → Botón COBRAR → Validación → Guardar (TODO: DB) → Limpiar
 ```
 
 ## 📊 Lógica de Negocio
 
 ### Cálculo de ITBIS
-- Tasa fija: 18%
-- Se aplica al subtotal
-- Se muestra desglosado en el resumen
+- Tasa fija: **18%** (República Dominicana)
+- Aplicado al subtotal
+- Mostrado desglosado
 
-### Gestión de Items
-- Cada servicio puede tener múltiples unidades
-- Precio unitario fijo por servicio
-- Subtotal calculado automáticamente
+### Validación con Zod
+```javascript
+const LineaFacturaSchema = z.object({
+  id: z.string(),
+  servicioId: z.number(),
+  nombre: z.string().min(1),
+  precio: z.number().positive(),
+  cantidad: z.number().positive(),
+  unidad: z.string(),
+  subtotal: z.number().nonnegative(),
+});
+```
 
-### Validaciones
-- No se puede completar sin items
-- No se puede completar sin método de pago
-- Cantidad mínima: 1
+### Virtualización de Lista
+- Usa `@tanstack/react-virtual`
+- Solo renderiza items visibles + overscan
+- Soporta cientos de servicios sin lag
+- Scroll fluido y performante
+
+## ✅ Integración con CONFIGURACIÓN
+
+El módulo está **completamente integrado** con el módulo CONFIGURACIÓN:
+
+### Integración Implementada
+```javascript
+// src/data/mockServicios.js
+import { getServicios } from '@configuracion/api/servicios';
+import { getCategorias } from '@configuracion/api/categorias';
+
+// src/data/mockMetodosPago.js
+import { getMetodosPago } from '@configuracion/api/metodosPago';
+```
+
+### Fuentes de Datos
+- **Servicios**: Cargados desde `useServiciosStore` (Configuración)
+- **Categorías**: Cargadas desde `useCategoriasStore` (Configuración)
+- **Métodos de Pago**: Cargados desde `useMetodosPagoStore` (Configuración)
+
+### Ventajas de la Integración
+- ✅ **Sincronización en tiempo real**: Los cambios en Configuración se reflejan automáticamente
+- ✅ **Fuente única de verdad**: Los datos vienen de un solo lugar
+- ✅ **Validación centralizada**: Zod valida en el módulo de Configuración
+- ✅ **Fácil mantenimiento**: Actualizar servicios/precios en un solo módulo
+
+### Conexión a Base de Datos
+```javascript
+// useFacturaStore.js
+getFacturaData: () => {
+  // Retorna datos listos para guardar en PostgreSQL
+  return {
+    items, cliente, fechaEntrega, metodoPago,
+    subtotal, itbis, total, fecha
+  };
+};
+```
+
+## ⚙️ Configuración de Vite
+
+Para permitir la integración con el módulo CONFIGURACIÓN, se configuró un alias en `vite.config.js`:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@configuracion': path.resolve(__dirname, '../configuracion/src'),
+    },
+  },
+})
+```
+
+Esto permite importar desde el módulo de configuración usando:
+```javascript
+import { getServicios } from '@configuracion/api/servicios';
+```
 
 ## 🚀 Comandos
 
@@ -158,52 +229,122 @@ npm run preview
 npm run lint
 ```
 
+## 📝 Diferencias con Código Anterior
+
+### ❌ Eliminado (Código Viejo)
+- Módulo "new-order" / "nuevo pedido"
+- Librerías duplicadas
+- Código sin estructura modular
+- Mock data mezclado con componentes
+
+### ✅ Implementado (Código Nuevo)
+- Estructura modular profesional
+- Todas las librerías modernas obligatorias
+- Separación clara de concerns
+- Virtualización para performance
+- Validación con Zod
+- React Query para datos
+- Zustand para estado
+- Sonner para notificaciones
+
 ## 🔜 Próximos Pasos
 
-1. **Integración con Backend**
-   - Guardar facturas en PostgreSQL
-   - Autenticación de cajeros
-   - Búsqueda de clientes
+### Integración con Backend
+- [x] ✅ **Conectado con módulo CONFIGURACIÓN** (Completado)
+- [ ] Guardar facturas en PostgreSQL
+- [ ] Búsqueda real de clientes
+- [ ] Autenticación de cajeros
 
-2. **Generación de Documentos**
-   - PDF de facturas
-   - Tickets de impresión térmica
-   - Envío por email/WhatsApp
+### Generación de Documentos
+- [ ] Generar PDF de facturas
+- [ ] Tickets de impresión térmica
+- [ ] Envío por email/WhatsApp
 
-3. **Módulo CONFIGURACIÓN**
-   - Gestión de servicios
-   - Configuración de precios
-   - Métodos de pago habilitados
-   - Personalización de ITBIS
+### Funcionalidades Avanzadas
+- [ ] Descuentos y promociones
+- [ ] Notas en líneas de factura
+- [ ] Facturas pendientes
+- [ ] Histórico de facturas
+- [ ] Reportes de ventas
 
-4. **Reportes y Análisis**
-   - Dashboard de ventas
-   - Integración con Metabase
-   - Estadísticas en tiempo real
+## 📦 Dependencias
 
-## 📝 Notas Importantes
+```json
+{
+  "dependencies": {
+    "@tanstack/react-query": "^5.x",
+    "@tanstack/react-virtual": "^3.x",
+    "clsx": "^2.x",
+    "date-fns": "^4.x",
+    "lucide-react": "^0.x",
+    "react": "^19.x",
+    "react-dom": "^19.x",
+    "sonner": "^1.x",
+    "zod": "^3.x",
+    "zustand": "^5.x"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.x",
+    "postcss": "^8.x",
+    "autoprefixer": "^10.x",
+    "vite": "^7.x"
+  }
+}
+```
 
-- ⚠️ Datos actuales son **MOCK** - Todo es temporal
-- ⚠️ La función "Completar Factura" solo muestra un alert
-- ⚠️ No hay persistencia de datos aún
-- ✅ El código está listo para conectarse a backend
-- ✅ Usa las mejores prácticas de React moderno
-- ✅ Sin dependencias obsoletas
+## ⚠️ Notas Importantes
 
-## 🏗️ Arquitectura
+- **✅ Datos Integrados**: Los servicios, categorías y métodos de pago vienen del módulo CONFIGURACIÓN
+- **Sincronización Automática**: Los cambios en Configuración se reflejan automáticamente en Facturación
+- **Sin Backend PostgreSQL**: Las operaciones de guardar solo muestran console.log (próximo paso)
+- **Preparado para Producción**: La arquitectura está lista para conectarse a APIs reales
+- **Sin Código Viejo**: Todo desarrollado desde cero
+- **Best Practices**: Siguiendo las mejores prácticas de React 2025
+- **Vite Alias**: Usa `@configuracion` para importar del módulo de configuración
+
+## 🏗️ Arquitectura Técnica
 
 ```
-Usuario
-  ↓
-NuevaFacturaPage (Layout)
-  ↓
-  ├─→ ServiciosGrid → ServicioCard → useFactura.agregarServicio()
-  └─→ ResumenFactura
-        ├─→ LineaFactura → useFactura (incrementar/decrementar/eliminar)
-        ├─→ TotalesFactura → useFactura (getSubtotal/getItbis/getTotal)
-        └─→ MetodoPagoSelector → useFactura.setMetodoPago()
+┌─────────────────────────────────────────────────────────────┐
+│                  MÓDULO CONFIGURACIÓN                        │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌────────────┐ │
+│  │useServiciosStore │  │useCategoriasStore│  │useMetodos  │ │
+│  │   (Zustand)      │  │    (Zustand)     │  │PagoStore   │ │
+│  └────────┬─────────┘  └────────┬─────────┘  └─────┬──────┘ │
+│           │                     │                   │         │
+│  ┌────────▼─────────────────────▼───────────────────▼──────┐ │
+│  │              API Layer (src/api/)                        │ │
+│  │  • servicios.js  • categorias.js  • metodosPago.js      │ │
+│  └──────────────────────────────────────────────────────────┘ │
+└──────────────────────────┬───────────────────────────────────┘
+                           │ @configuracion alias
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  MÓDULO FACTURACIÓN                          │
+│                                                              │
+│  Usuario → NuevaFacturaPage (Layout Responsivo)             │
+│              ↓                                               │
+│    ┌─────────┴────────┐                                     │
+│    │  Data Layer      │ (Importa desde @configuracion)      │
+│    │  mockServicios   │ → getServicios()                    │
+│    │  mockMetodosPago │ → getMetodosPago()                  │
+│    └─────────┬────────┘                                     │
+│              ↓                                               │
+│    ├─→ Header + ClienteSelector + FechaEntregaSelector      │
+│    ├─→ ListaServicios                                       │
+│    │     ├─→ Categorias → useQuery(getCategorias)           │
+│    │     ├─→ Buscador → Filtrado en tiempo real             │
+│    │     └─→ @tanstack/react-virtual → ServicioCard         │
+│    │           └─→ useFacturaStore + Toast                  │
+│    └─→ PanelFactura                                         │
+│          ├─→ LineaFactura (incrementar/decrementar/eliminar)│
+│          ├─→ Totales (cálculos computados)                  │
+│          ├─→ MetodosPago (useQuery)                         │
+│          └─→ Botones: Cobrar/Pendiente/Imprimir             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-**Desarrollado con Claude Code** 🤖
+**Desarrollado completamente desde cero con Claude Code** 🤖
+**Sin código heredado** | **Solo librerías modernas** | **Arquitectura profesional**

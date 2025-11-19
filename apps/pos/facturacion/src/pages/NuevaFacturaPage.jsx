@@ -1,29 +1,33 @@
-import HeaderFacturacion from '../components/HeaderFacturacion';
-import ServiciosGrid from '../components/ServiciosGrid';
-import ResumenFactura from '../components/ResumenFactura';
+import Header from '../components/layout/Header';
+import ClienteSelector from '../components/layout/ClienteSelector';
+import FechaEntregaSelector from '../components/layout/FechaEntregaSelector';
+import ListaServicios from '../components/servicios/ListaServicios';
+import PanelFactura from '../components/factura/PanelFactura';
 
-/**
- * Página principal del módulo de Facturación
- * Interfaz estilo POS para crear nuevas facturas
- */
 export default function NuevaFacturaPage() {
   return (
-    <div className="min-h-screen bg-[#F4F4F5] p-6">
-      <div className="max-w-[1800px] mx-auto">
+    <div className="min-h-screen bg-[#F4F4F5] p-4 md:p-6">
+      <div className="max-w-[1920px] mx-auto">
         {/* Header */}
-        <HeaderFacturacion />
+        <Header />
 
-        {/* Layout de 2 columnas: Servicios + Resumen */}
+        {/* Grid de selecciones de cliente y fecha */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+          <ClienteSelector />
+          <FechaEntregaSelector />
+        </div>
+
+        {/* Layout principal: Servicios (izquierda) + Factura (derecha) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Columna izquierda: Grid de servicios (2/3) */}
-          <div className="lg:col-span-2">
-            <ServiciosGrid />
+          {/* Panel de servicios - 2/3 del espacio */}
+          <div className="lg:col-span-2 h-[calc(100vh-400px)] lg:h-[calc(100vh-320px)]">
+            <ListaServicios />
           </div>
 
-          {/* Columna derecha: Resumen de factura (1/3) */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              <ResumenFactura />
+          {/* Panel de factura - 1/3 del espacio */}
+          <div className="lg:col-span-1 h-[calc(100vh-400px)] lg:h-[calc(100vh-320px)]">
+            <div className="sticky top-6 h-full">
+              <PanelFactura />
             </div>
           </div>
         </div>
