@@ -1,37 +1,181 @@
-// API pública para exportar servicios al módulo de Facturación
-import { useServiciosStore } from '../hooks/useServiciosStore';
+// API para gestionar servicios - Integración con Backend
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 /**
- * Obtiene todos los servicios activos filtrados por categoría
+ * Obtiene todos los servicios filtrados por categoría
  * @param {string} categoria - ID de la categoría o 'todos'
  * @returns {Promise<Array>} Lista de servicios
  */
 export const getServicios = async (categoria = 'todos') => {
-  // Simular latencia de red
-  await new Promise((resolve) => setTimeout(resolve, 300));
+  try {
+    const url = categoria === 'todos'
+      ? `${API_URL}/api/servicios`
+      : `${API_URL}/api/servicios?categoria=${categoria}`;
 
-  const store = useServiciosStore.getState();
-  const servicios = store.getServiciosActivos();
+    const response = await fetch(url);
 
-  if (categoria === 'todos') {
-    return servicios;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al obtener servicios');
+    }
+
+    return result.data;
+  } catch (error) {
+    console.error('Error al obtener servicios:', error);
+    throw error;
   }
-
-  return servicios.filter((servicio) => servicio.categoria === categoria);
 };
 
 /**
  * Obtiene un servicio por su ID
  * @param {number} id - ID del servicio
- * @returns {Promise<Object|null>} Servicio encontrado o null
+ * @returns {Promise<Object>} Servicio encontrado
  */
 export const getServicioById = async (id) => {
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  try {
+    const response = await fetch(`${API_URL}/api/servicios/${id}`);
 
-  const store = useServiciosStore.getState();
-  const servicio = store.servicios.find((s) => s.id === id && s.activo);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  return servicio || null;
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al obtener servicio');
+    }
+
+    return result.data;
+  } catch (error) {
+    console.error('Error al obtener servicio:', error);
+    throw error;
+  }
+};
+
+/**
+ * Crea un nuevo servicio
+ * @param {Object} servicio - Datos del servicio
+ * @returns {Promise<Object>} Resultado de la operación
+ */
+export const createServicio = async (servicio) => {
+  try {
+    const response = await fetch(`${API_URL}/api/servicios`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(servicio),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al crear servicio');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error al crear servicio:', error);
+    throw error;
+  }
+};
+
+/**
+ * Actualiza un servicio existente
+ * @param {number} id - ID del servicio
+ * @param {Object} servicio - Datos actualizados del servicio
+ * @returns {Promise<Object>} Resultado de la operación
+ */
+export const updateServicio = async (id, servicio) => {
+  try {
+    const response = await fetch(`${API_URL}/api/servicios/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(servicio),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al actualizar servicio');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error al actualizar servicio:', error);
+    throw error;
+  }
+};
+
+/**
+ * Elimina un servicio
+ * @param {number} id - ID del servicio
+ * @returns {Promise<Object>} Resultado de la operación
+ */
+export const deleteServicio = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/api/servicios/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al eliminar servicio');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error al eliminar servicio:', error);
+    throw error;
+  }
+};
+
+/**
+ * Activa o desactiva un servicio
+ * @param {number} id - ID del servicio
+ * @returns {Promise<Object>} Resultado de la operación
+ */
+export const toggleServicio = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/api/servicios/${id}/toggle`, {
+      method: 'PATCH',
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Error al cambiar estado del servicio');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error al cambiar estado del servicio:', error);
+    throw error;
+  }
 };
 
 /**
@@ -40,20 +184,22 @@ export const getServicioById = async (id) => {
  * @returns {Promise<Array>} Lista de servicios que coinciden
  */
 export const buscarServicios = async (query) => {
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  try {
+    const servicios = await getServicios('todos');
 
-  const store = useServiciosStore.getState();
-  const servicios = store.getServiciosActivos();
+    if (!query || query.trim() === '') {
+      return servicios;
+    }
 
-  if (!query || query.trim() === '') {
-    return servicios;
+    const queryLower = query.toLowerCase();
+    return servicios.filter((servicio) =>
+      servicio.nombre.toLowerCase().includes(queryLower) ||
+      servicio.descripcion?.toLowerCase().includes(queryLower)
+    );
+  } catch (error) {
+    console.error('Error al buscar servicios:', error);
+    throw error;
   }
-
-  const queryLower = query.toLowerCase();
-  return servicios.filter((servicio) =>
-    servicio.nombre.toLowerCase().includes(queryLower) ||
-    servicio.descripcion?.toLowerCase().includes(queryLower)
-  );
 };
 
 /**
@@ -61,18 +207,20 @@ export const buscarServicios = async (query) => {
  * @returns {Promise<Object>} Estadísticas
  */
 export const getEstadisticasServicios = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  try {
+    const servicios = await getServicios('todos');
 
-  const store = useServiciosStore.getState();
-  const servicios = store.servicios;
-
-  return {
-    total: servicios.length,
-    activos: servicios.filter((s) => s.activo).length,
-    inactivos: servicios.filter((s) => !s.activo).length,
-    porCategoria: servicios.reduce((acc, servicio) => {
-      acc[servicio.categoria] = (acc[servicio.categoria] || 0) + 1;
-      return acc;
-    }, {}),
-  };
+    return {
+      total: servicios.length,
+      activos: servicios.filter((s) => s.activo).length,
+      inactivos: servicios.filter((s) => !s.activo).length,
+      porCategoria: servicios.reduce((acc, servicio) => {
+        acc[servicio.categoria_id] = (acc[servicio.categoria_id] || 0) + 1;
+        return acc;
+      }, {}),
+    };
+  } catch (error) {
+    console.error('Error al obtener estadísticas:', error);
+    throw error;
+  }
 };
