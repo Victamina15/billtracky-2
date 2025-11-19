@@ -1,5 +1,6 @@
 Estructura inicial del monorepo Billtracky-2.0
 - apps/
-   - landing/   → Landing Page del sistema
+   - pos/
+      - new-order/ → Módulo de facturación POS (Nuevo Pedido)
 - packages/
    - utils/     → Código reutilizable
