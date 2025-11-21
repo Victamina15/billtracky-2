@@ -46,7 +46,7 @@ services:
   # Dashboard Frontend
   dashboard:
     build:
-      context: ./apps/pos/dashboard
+      context: .
       dockerfile: Dockerfile
     container_name: billtracky-dashboard
     environment:
@@ -64,8 +64,8 @@ services:
   # Facturación Frontend
   facturacion:
     build:
-      context: ./apps/pos/facturacion
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.facturacion
     container_name: billtracky-facturacion
     environment:
       VITE_API_URL: http://localhost:3001
@@ -82,8 +82,8 @@ services:
   # Configuración Frontend
   configuracion:
     build:
-      context: ./apps/pos/configuracion
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.configuracion
     container_name: billtracky-configuracion
     environment:
       VITE_API_URL: http://localhost:3001
