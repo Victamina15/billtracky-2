@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useCategoriasStore } from '../../hooks/useCategoriasStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 
 const coloresPredefinidos = [
   '#3B82F6', '#10B981', '#8B5CF6', '#F59E0B', '#EF4444', '#6366F1',

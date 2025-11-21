@@ -1,7 +1,7 @@
 import { Edit2, Trash2, ToggleLeft, ToggleRight } from 'lucide-react';
 import { toast } from 'sonner';
-import { useServiciosStore } from '../../../hooks/configuracion/useServiciosStore';
-import { useCategoriasStore } from '../../../hooks/configuracion/useCategoriasStore';
+import { useServiciosStore } from '@shared/hooks/useServiciosStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 
 export default function ServicioRow({ servicio, onEditar }) {
   const eliminarServicio = useServiciosStore((state) => state.eliminarServicio);

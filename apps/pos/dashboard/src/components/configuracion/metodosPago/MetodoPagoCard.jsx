@@ -1,6 +1,6 @@
 import { Edit2, Trash2, ToggleLeft, ToggleRight, Banknote, CreditCard, ArrowRightLeft, Clock } from 'lucide-react';
 import { toast } from 'sonner';
-import { useMetodosPagoStore } from '../../../hooks/configuracion/useMetodosPagoStore';
+import { useMetodosPagoStore } from '@shared/hooks/useMetodosPagoStore';
 
 const iconMap = {
   Banknote,

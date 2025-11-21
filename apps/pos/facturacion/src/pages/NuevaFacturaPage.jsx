@@ -1,8 +1,8 @@
-import Header from '../components/layout/Header';
-import ClienteSelector from '../components/layout/ClienteSelector';
-import FechaEntregaSelector from '../components/layout/FechaEntregaSelector';
-import ListaServicios from '../components/servicios/ListaServicios';
-import PanelFactura from '../components/factura/PanelFactura';
+import Header from '@shared/components/layout/Header';
+import ClienteSelector from '@shared/components/layout/ClienteSelector';
+import FechaEntregaSelector from '@shared/components/layout/FechaEntregaSelector';
+import ListaServicios from '@shared/components/servicios/ListaServicios';
+import PanelFactura from '@shared/components/factura/PanelFactura';
 
 export default function NuevaFacturaPage() {
   return (

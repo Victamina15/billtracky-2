@@ -1,0 +1,13 @@
+{
+  "name": "@billtracky/shared",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/index.js",
+  "description": "Shared code for Billtracky-2 monorepo",
+  "exports": {
+    "./api/*": "./src/api/*",
+    "./hooks/*": "./src/hooks/*",
+    "./components/*": "./src/components/*",
+    "./utils/*": "./src/utils/*"
+  }
+}

@@ -1,6 +1,6 @@
 import { Edit2, Trash2, ToggleLeft, ToggleRight, Folder } from 'lucide-react';
 import { toast } from 'sonner';
-import { useCategoriasStore } from '../../hooks/useCategoriasStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 
 export default function CategoriaCard({ categoria, onEditar }) {
   const eliminarCategoria = useCategoriasStore((state) => state.eliminarCategoria);

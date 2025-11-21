@@ -1,8 +1,8 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useServiciosStore } from '../../../hooks/configuracion/useServiciosStore';
-import { useCategoriasStore } from '../../../hooks/configuracion/useCategoriasStore';
+import { useServiciosStore } from '@shared/hooks/useServiciosStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 
 export default function FormServicio({ servicio, onCerrar }) {
   const agregarServicio = useServiciosStore((state) => state.agregarServicio);

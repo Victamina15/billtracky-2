@@ -1,7 +1,7 @@
-import ClienteSelector from '../components/facturacion/layout/ClienteSelector'
-import FechaEntregaSelector from '../components/facturacion/layout/FechaEntregaSelector'
-import ListaServicios from '../components/facturacion/servicios/ListaServicios'
-import PanelFactura from '../components/facturacion/factura/PanelFactura'
+import ClienteSelector from '@shared/components/layout/ClienteSelector'
+import FechaEntregaSelector from '@shared/components/layout/FechaEntregaSelector'
+import ListaServicios from '@shared/components/servicios/ListaServicios'
+import PanelFactura from '@shared/components/factura/PanelFactura'
 
 export function FacturacionNuevaPage() {
   return (

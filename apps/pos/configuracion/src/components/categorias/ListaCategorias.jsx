@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
-import { useCategoriasStore } from '../../hooks/useCategoriasStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 import FormCategoria from './FormCategoria';
 import CategoriaCard from './CategoriaCard';
 

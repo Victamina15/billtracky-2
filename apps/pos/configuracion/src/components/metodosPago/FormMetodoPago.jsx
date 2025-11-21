@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useMetodosPagoStore } from '../../hooks/useMetodosPagoStore';
+import { useMetodosPagoStore } from '@shared/hooks/useMetodosPagoStore';
 
 const iconosDisponibles = [
   { value: 'Banknote', label: 'Billete' },

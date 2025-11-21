@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
-import { useMetodosPagoStore } from '../../../hooks/configuracion/useMetodosPagoStore';
+import { useMetodosPagoStore } from '@shared/hooks/useMetodosPagoStore';
 import FormMetodoPago from './FormMetodoPago';
 import MetodoPagoCard from './MetodoPagoCard';
 

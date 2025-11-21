@@ -1,7 +1,7 @@
 import { Plus, Search } from 'lucide-react';
 import { useState } from 'react';
-import { useServiciosStore } from '../../../hooks/configuracion/useServiciosStore';
-import { useCategoriasStore } from '../../../hooks/configuracion/useCategoriasStore';
+import { useServiciosStore } from '@shared/hooks/useServiciosStore';
+import { useCategoriasStore } from '@shared/hooks/useCategoriasStore';
 import FormServicio from './FormServicio';
 import ServicioRow from './ServicioRow';
 
