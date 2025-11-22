@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # FORZAR REBUILD
-ARG CACHEBUST=20241122020
+ARG CACHEBUST=20241122021
 RUN echo "=== BUILD: $CACHEBUST ==="
 
 # Copiar archivos de dependencias del dashboard
