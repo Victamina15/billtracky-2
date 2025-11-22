@@ -38,13 +38,24 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
   const [errors, setErrors] = useState({});
 
   // Store
+  const clientes = useClientesStore((state) => state.clientes);
   const busqueda = useClientesStore((state) => state.busqueda);
   const setBusqueda = useClientesStore((state) => state.setBusqueda);
-  const getClientesFiltrados = useClientesStore((state) => state.getClientesFiltrados);
   const addCliente = useClientesStore((state) => state.addCliente);
   const setClienteSeleccionado = useClientesStore((state) => state.setClienteSeleccionado);
 
-  const clientesFiltrados = useMemo(() => getClientesFiltrados(), [busqueda, getClientesFiltrados]);
+  // Filtrado reactivo de clientes
+  const clientesFiltrados = useMemo(() => {
+    if (!busqueda.trim()) return clientes;
+
+    const searchTerm = busqueda.toLowerCase();
+    return clientes.filter(
+      (cliente) =>
+        cliente.nombre.toLowerCase().includes(searchTerm) ||
+        cliente.telefono.toLowerCase().includes(searchTerm) ||
+        (cliente.email && cliente.email.toLowerCase().includes(searchTerm))
+    );
+  }, [clientes, busqueda]);
 
   const handleSelectCliente = (cliente) => {
     setClienteSeleccionado(cliente);
