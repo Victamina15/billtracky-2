@@ -28,6 +28,7 @@ import { toast } from 'sonner';
  */
 export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
   const [modoCrear, setModoCrear] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
@@ -39,23 +40,21 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
 
   // Store
   const clientes = useClientesStore((state) => state.clientes);
-  const busqueda = useClientesStore((state) => state.busqueda);
-  const setBusqueda = useClientesStore((state) => state.setBusqueda);
   const addCliente = useClientesStore((state) => state.addCliente);
   const setClienteSeleccionado = useClientesStore((state) => state.setClienteSeleccionado);
 
   // Filtrado reactivo de clientes
   const clientesFiltrados = useMemo(() => {
-    if (!busqueda.trim()) return clientes;
+    if (!searchQuery.trim()) return clientes;
 
-    const searchTerm = busqueda.toLowerCase();
+    const searchTerm = searchQuery.toLowerCase();
     return clientes.filter(
       (cliente) =>
         cliente.nombre.toLowerCase().includes(searchTerm) ||
-        cliente.telefono.toLowerCase().includes(searchTerm) ||
+        cliente.telefono.includes(searchQuery) ||
         (cliente.email && cliente.email.toLowerCase().includes(searchTerm))
     );
-  }, [clientes, busqueda]);
+  }, [clientes, searchQuery]);
 
   const handleSelectCliente = (cliente) => {
     setClienteSeleccionado(cliente);
@@ -64,7 +63,7 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
   };
 
   const handleClose = () => {
-    setBusqueda('');
+    setSearchQuery('');
     setModoCrear(false);
     setFormData({ nombre: '', telefono: '', email: '', direccion: '', notas: '' });
     setErrors({});
@@ -257,8 +256,8 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
             <Command className="rounded-lg border-[#E5E7EB] shadow-md bg-white">
               <CommandInput
                 placeholder="Buscar por nombre, teléfono o email..."
-                value={busqueda}
-                onValueChange={setBusqueda}
+                value={searchQuery}
+                onValueChange={setSearchQuery}
                 className="text-[#111827] placeholder:text-[#9CA3AF]"
               />
               <CommandList className="max-h-[300px]">
