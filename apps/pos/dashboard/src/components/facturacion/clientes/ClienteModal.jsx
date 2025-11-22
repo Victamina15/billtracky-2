@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { User, Phone, MapPin, Plus, Check, ArrowLeft } from 'lucide-react';
+import { User, Phone, MapPin, Plus, Check, ArrowLeft, Mail } from 'lucide-react';
 import { useClientesStore } from '../../../hooks/clientes/useClientesStore';
 import {
   Dialog,
@@ -31,6 +31,7 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
   const [formData, setFormData] = useState({
     nombre: '',
     telefono: '',
+    email: '',
     direccion: '',
     notas: '',
   });
@@ -54,7 +55,7 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
   const handleClose = () => {
     setBusqueda('');
     setModoCrear(false);
-    setFormData({ nombre: '', telefono: '', direccion: '', notas: '' });
+    setFormData({ nombre: '', telefono: '', email: '', direccion: '', notas: '' });
     setErrors({});
     onClose();
   };
@@ -177,6 +178,25 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="email" className="text-[#111827] font-medium">
+                Correo electrónico (opcional)
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Ej: usuario@email.com"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className={`border-[#E5E7EB] text-[#111827] placeholder:text-[#9CA3AF] focus:ring-[#2563EB] focus:border-[#2563EB] ${
+                  errors.email ? 'border-red-500' : ''
+                }`}
+              />
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="direccion" className="text-[#111827] font-medium">
                 Dirección (opcional)
               </Label>
@@ -225,7 +245,7 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
           <div className="space-y-4 mt-4">
             <Command className="rounded-lg border-[#E5E7EB] shadow-md bg-white">
               <CommandInput
-                placeholder="Buscar por nombre o teléfono..."
+                placeholder="Buscar por nombre, teléfono o email..."
                 value={busqueda}
                 onValueChange={setBusqueda}
                 className="text-[#111827] placeholder:text-[#9CA3AF]"
@@ -269,6 +289,14 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
                               {cliente.telefono}
                             </p>
                           </div>
+                          {cliente.email && (
+                            <div className="flex items-center gap-2 mt-1">
+                              <Mail className="w-3.5 h-3.5 text-[#6B7280]" />
+                              <p className="text-sm text-[#6B7280] truncate">
+                                {cliente.email}
+                              </p>
+                            </div>
+                          )}
                           {cliente.direccion && (
                             <div className="flex items-center gap-2 mt-1">
                               <MapPin className="w-3.5 h-3.5 text-[#6B7280]" />
@@ -284,18 +312,6 @@ export default function ClienteModal({ isOpen, onClose, onSelectCliente }) {
                 </CommandGroup>
               </CommandList>
             </Command>
-
-            {/* Botón para crear cliente cuando hay resultados */}
-            {clientesFiltrados.length > 0 && (
-              <Button
-                onClick={() => setModoCrear(true)}
-                variant="outline"
-                className="w-full border-[#E5E7EB] text-[#111827] hover:bg-[#F4F4F5]"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Crear Nuevo Cliente
-              </Button>
-            )}
           </div>
         )}
       </DialogContent>

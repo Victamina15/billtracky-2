@@ -32,17 +32,18 @@ Selector de cliente integrado en la pantalla de facturación:
 ### 1. Búsqueda de Cliente
 1. Usuario hace clic en "Buscar o agregar cliente"
 2. Se abre el modal en modo búsqueda
-3. Usuario escribe en el campo de búsqueda
+3. Usuario escribe en el campo de búsqueda (filtra por nombre, teléfono o email)
 4. Resultados se filtran en tiempo real
 5. Usuario selecciona un cliente de la lista
 6. Modal se cierra y cliente se asigna a la factura
 
 ### 2. Creación de Cliente
-1. Usuario hace clic en "Crear Nuevo Cliente" (dentro del modal o en estado vacío)
+1. Usuario hace clic en "+ Crear Cliente" (botón azul dentro del CommandEmpty cuando no hay resultados)
 2. Modal cambia a modo creación
 3. Usuario completa el formulario:
    - **Nombre** (obligatorio)
    - **Teléfono** (obligatorio)
+   - **Correo electrónico** (opcional, validado si se proporciona)
    - **Dirección** (opcional)
    - **Notas** (opcional)
 4. Sistema valida campos con Zod
@@ -53,7 +54,7 @@ Selector de cliente integrado en la pantalla de facturación:
    - Modal se cierra
    - Cliente se asigna a la factura
 6. Si hay errores:
-   - Mensajes de error se muestran bajo cada campo
+   - Mensajes de error se muestran bajo cada campo (ej: "Email inválido")
    - Usuario corrige y reintenta
 
 ### 3. Selección y Sincronización
@@ -108,11 +109,14 @@ const ClienteSchema = z.object({
   id: z.union([z.string(), z.number()]),
   nombre: z.string().min(1, 'El nombre es obligatorio'),
   telefono: z.string().min(1, 'El teléfono es obligatorio'),
+  email: z.string().email('Email inválido').optional().or(z.literal('')),
   direccion: z.string().optional(),
   notas: z.string().optional(),
   createdAt: z.date().optional(),
 });
 ```
+
+**Nota sobre validación de email:** El campo email es opcional, pero si el usuario proporciona un valor, debe ser un email válido. La validación acepta strings vacíos (`''`) o emails válidos.
 
 ## Paleta de Colores Billtracky-2
 
